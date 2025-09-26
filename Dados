@@ -1,0 +1,21 @@
+-- Autores
+INSERT INTO Authors (name, country) VALUES
+('J. K. Rowling', 'UK'),
+('George R. R. Martin', 'USA'),
+('Machado de Assis', 'Brasil');
+
+-- Livros
+INSERT INTO Books (title, genre, year_published, author_id) VALUES
+('Harry Potter e a Pedra Filosofal', 'Fantasia', 1997, 1),
+('A Guerra dos Tronos', 'Fantasia', 1996, 2),
+('Dom Casmurro', 'Romance', 1899, 3);
+
+-- Usuários
+INSERT INTO Users (name, email) VALUES
+('Ana Souza', 'ana@email.com'),
+('Carlos Lima', 'carlos@email.com');
+
+-- Empréstimos
+INSERT INTO Loans (user_id, book_id, loan_date, return_date, returned) VALUES
+(1, 1, '2025-09-01', '2025-09-15', TRUE),
+(2, 2, '2025-09-10', NULL, FALSE);
