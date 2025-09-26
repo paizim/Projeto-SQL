@@ -1,0 +1,19 @@
+-- Criar uma VIEW para facilitar consulta de empréstimos
+CREATE VIEW ActiveLoans AS
+SELECT u.name AS user, b.title AS book, l.loan_date
+FROM Loans l
+JOIN Users u ON l.user_id = u.user_id
+JOIN Books b ON l.book_id = b.book_id
+WHERE l.returned = FALSE;
+
+-- Criar índice para buscas mais rápidas
+CREATE INDEX idx_books_title ON Books(title);
+
+-- Procedure para registrar novo empréstimo
+DELIMITER //
+CREATE PROCEDURE NewLoan(IN userId INT, IN bookId INT)
+BEGIN
+    INSERT INTO Loans (user_id, book_id, loan_date, returned)
+    VALUES (userId, bookId, CURDATE(), FALSE);
+END //
+DELIMITER ;
