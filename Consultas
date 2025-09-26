@@ -1,0 +1,24 @@
+-- 1. Listar todos os livros com o nome do autor
+SELECT b.title, a.name AS author, b.genre, b.year_published
+FROM Books b
+JOIN Authors a ON b.author_id = a.author_id;
+
+-- 2. Ver todos os livros atualmente emprestados
+SELECT u.name AS user, b.title AS book, l.loan_date
+FROM Loans l
+JOIN Users u ON l.user_id = u.user_id
+JOIN Books b ON l.book_id = b.book_id
+WHERE l.returned = FALSE;
+
+-- 3. Contar quantos livros cada autor possui
+SELECT a.name, COUNT(b.book_id) AS total_books
+FROM Authors a
+LEFT JOIN Books b ON a.author_id = b.author_id
+GROUP BY a.name;
+
+-- 4. Ver histórico de empréstimos de um usuário específico
+SELECT u.name, b.title, l.loan_date, l.return_date, l.returned
+FROM Loans l
+JOIN Users u ON l.user_id = u.user_id
+JOIN Books b ON l.book_id = b.book_id
+WHERE u.name = 'Ana Souza';
